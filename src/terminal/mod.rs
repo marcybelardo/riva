@@ -1,3 +1,3 @@
-pub mod input;
+pub mod term;
 
-pub use input::*;
+pub use term::Terminal;
