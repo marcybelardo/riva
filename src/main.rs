@@ -1,40 +1,14 @@
-use std::io::{
-    Write, 
-    stdout,
-};
-use std::time::Duration;
-use crossterm::{
-    execute,
-    Result,
-    terminal::{
-        enable_raw_mode,
-        disable_raw_mode,
-    },
-    event::{
-        poll,
-        read,
-        Event,
-        KeyCode,
-        KeyModifiers,
-    },
-}; 
+use riva::terminal::input;
 
-fn main() -> Result<()> {
-    while let Ok(run) = enable_raw_mode() {
-        if poll(Duration::from_millis(500))? {
-            match read()? {
-                Event::Key(event) => {
-                    writeln!(stdout(), "{:?}\n", event);
-                    match (event.code, event.modifiers) {
-                        (KeyCode::Char('c'), KeyModifiers::CONTROL) => break,
-                        _ => continue,
-                    };
-                },
-                _ => continue,
-            };
-        } else {
-            // nothing
-        }
+use std::error::Error;
+use std::process::exit;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let term = input::Terminal;
+
+    if let Err(err) = input::Terminal::run(&term) {
+        eprintln!("Error running terminal: {:#?}", err);
+        exit(1);
     }
 
     Ok(())
