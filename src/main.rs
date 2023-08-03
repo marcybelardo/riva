@@ -5,8 +5,8 @@ use std::process::exit;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut term = Terminal {
-        col: 0,
-        row: 0,
+        current_col: 0,
+        current_row: 0,
     };
 
     if let Err(err) = Terminal::run(&mut term) {
