@@ -1,15 +1,10 @@
-use riva::terminal::Terminal;
+use riva::editor::Editor;
 
-use std::error::Error;
-use std::process::exit;
+// const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-fn main() -> Result<(), Box<dyn Error>> {
-    let mut term = Terminal;
-
-    if let Err(err) = Terminal::run(&mut term) {
-        eprintln!("Error running terminal: {:#?}", err);
-        exit(1);
-    }
+fn main() -> crossterm::Result<()> {
+    let mut editor = Editor::new();
+    while editor.run()? {}
 
     Ok(())
 }

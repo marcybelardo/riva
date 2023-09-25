@@ -13,6 +13,9 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+# Let's just ignore this one file for now, and then I'll delete it later
+src/old_main.rs
 =======
 /target
 >>>>>>> dc90342 (Raw mode, reads keys and can exit with ctrl+c)
